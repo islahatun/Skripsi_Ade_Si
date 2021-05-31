@@ -1,0 +1,45 @@
+
+
+//     $(document).ready(function() 
+//     {
+//         $("#showmaps").click(function() 
+//         {
+//             $.ajax({
+//                 url         : base_url+"Home_maps/getAceh",
+//                 dataType    : "JSON",
+//                 cache       : false,
+//                 success     : function(msg) 
+//                 {
+//                     console.log(msg);
+//                 }
+//             })
+//         })
+//     });
+
+
+
+// Highcharts.maps["countries/id/id-all"] = 
+// {
+//     "title":"Indonesia",
+//     "version":"1.1.2",
+//     "type":"FeatureCollection",
+//     "copyright":"Copyright (c) 2015 Highsoft AS, Based on data from Natural Earth",
+//     "copyrightShort":"Natural Earth",
+//     "copyrightUrl":"http://www.naturalearthdata.com",
+//     "crs":{
+//         "type":"name",
+//         "properties":{"name":"urn:ogc:def:crs:EPSG:23836"}
+//         },
+//     "hc-transform":
+//     {
+//         "default":
+//         {
+//             "rotation":-0.0523598775598,
+//             "crs":"+proj=tmerc +lat_0=0 +lon_0=112.5 +k=0.9999 +x_0=200000 +y_0=1500000 +ellps=WGS84 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs",
+//             "scale":0.000132056229838,
+//             "jsonres":15.5,
+//             "jsonmarginX":-999,"jsonmarginY":9851.0,"xoffset":-1856151.37844,"yoffset":2110546.03205
+//         }
+//     },
+//     "features":features
+// } 

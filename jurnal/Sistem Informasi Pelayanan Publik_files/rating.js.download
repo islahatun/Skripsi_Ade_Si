@@ -1,0 +1,33 @@
+$(document).ready(function() {
+  $(document).on("click", "#send-rating, .send-rating", function(e) {
+      e.preventDefault();
+
+    	var id_ref_emoticon 				     = $(this).attr('data-id');
+    	var id_ref_standar_layanan	     = $('#id_ref_standar_layanan').text();
+      var this_rating                  = $(this).parent();
+
+      if($('.emoticon').hasClass('selected')) {
+        return false;
+      }
+
+      $(this).addClass('selected');
+      
+      $.ajax( {
+        type: "GET",
+        url: base_url+"pelayanan_publik/rating/"+id_ref_standar_layanan+"/"+id_ref_emoticon,
+          success: function() {
+            $('#success_send_rating').text('Terimakasih');
+            $('#success_send_rating').clone().appendTo('#success_send_rating2');
+
+            $('.radio-inline').addClass('unselect');
+            this_rating.removeClass('unselect');
+            $('.emoticon').css('background', '');
+    
+            var val = $("input[name='emoticon']:checked").val();
+            $('#formRating input[value="'+val+'"]').prop("checked");
+            $('#formRating input[value="'+val+'"]').parent().removeClass("unselect").addClass("select");
+          }
+      });
+  });
+});
+

@@ -1,0 +1,28 @@
+$(document).on("click", "a.onsearch-law", function() {
+  uriprop     = $(this).attr('data-uri');
+   $.ajax({
+      url     : base_url+'unduhan/description/'+uriprop,
+     type: "POST",
+        sync: false,
+        async: false,
+        cache: false,
+        success: function (data) {
+          
+        }
+    });
+  return false;
+});
+
+// $(document).on("click", "a.ondownload-file", function() {
+//   uriprop     = $(this).attr('data-uri');
+//    $.ajax({
+//       url     : base_url+'unduhan/file/'+uriprop,
+//       dataType: 'json',
+//       type  : 'post',
+//       data  : {uriprop: uriprop},
+//       success: function (data) {
+//       }
+//     });
+//   return false;
+// });
+

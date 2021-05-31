@@ -1,0 +1,258 @@
+var lang_email_exsist = 'Email already exsist';
+var lang_invalid_email = 'Invalid email address';
+var lang_required = 'required';
+var lang_strong = 'Strong';
+var lang_medium = 'Medium';
+var lang_weak = 'Weak';
+var lang_success = 'Success.';
+var lang_error = 'Error.';
+var lang_equal_to = 'not equal';
+var lang_required_min = 'Required, min. {0} Character.';
+var lang_flag_comment_confirm = 'Do you want to flag this comment?';
+var lang_delete_comment_confirm = 'Do you want to delete this comment?';
+
+function loading(){
+    $('#page-loader').removeClass('hide').show()
+}
+function loadingcomplete(){
+    $('#page-loader').addClass('hide').hide()
+}
+
+
+
+// function loading(type){
+//     type = (type) ? type : "";
+//     $('body').append(" <div id='loading-box'>\
+//             <div id='box'></div>\
+//             <div id='loading-area'>\
+//                 <span id='loading-box'><i class='glyphicon glyphicon-refresh glyphicon-refresh-animate icon-refresh icon-spin'></i> </span>\
+//                 <span>"+type+"</span>\
+//             </div>\
+//         </div>")
+//     $('body').addClass('freeze');
+// }
+// function loadingcomplete(){
+//     $('#loading-box').remove();
+//     $('body').removeClass('freeze');
+// }
+function error_mobile(id,ret){
+	return $(id).html("<span class='error'> "+ret+"</span>");
+}
+function show_success_message(id, ret) {
+	// return $(id).html("<div class='success'> "+lang_success+' '+ret.message+"</div>");
+	return $(id).html("<div class='success'> "+ret.message+"</div>");
+}
+function show_error_message(id, ret) {
+	// return $(id).html("<div class='error'> "+lang_error+' '+ret.message+"</div>");
+	return $(id).html("<div class='error'> "+ret.message+"</div>");
+}
+
+function confirmSubmit(){ 
+	if(document.getElementById("votefor").value == null){
+		var agree=confirm("Please select an entry before voting."); 
+		return false;
+	}
+}
+// //contact us
+// $(document).ready(function(){
+// 	var d = new Date();
+// 	var day = d.getDate();
+// 	var month = d.getMonth();
+// 	var year = d.getFullYear();
+// 	var hours = d.getHours();
+// 	var minute = d.getMinutes();
+// 	var seconds = d.getSeconds();
+
+// 	OneSignal.push(function() {
+// 		OneSignal.isPushNotificationsEnabled(function(isEnabled) {
+// 		   if (!isEnabled){
+// 		      var minutes = minute+15;
+// 		      var now_time = hours+minutes+seconds 
+// 		      var get_time_cache = getCookie('notify');
+// 		      if(!get_time_cache){
+// 		         OneSignal.push(function() {
+// 		            OneSignal.registerForPushNotifications();
+// 		         });
+// 		         setCookie('notify', now_time);
+// 		      }
+// 		      else{
+// 		         if(get_time_cache < now_time){
+// 		            OneSignal.push(function() {
+// 		               OneSignal.registerForPushNotifications();
+// 		            });
+// 		            setCookie('notify', now_time);
+// 		         }
+// 		      }
+// 		   }
+// 		});
+// 	});
+// });
+
+
+var loadingBtn 	= '<i class="icon-spin icon-spinner"></i> {lang_loading}';
+var ai=0;
+var au=0;
+var ad=0;
+var im=0;
+$(window).scroll(function() {
+	if ($(this).scrollTop() > 1){  
+	    $('header').addClass("sticky");
+	}
+	else{
+		$('header').removeClass("sticky");
+	}
+});
+
+
+// $( document ).ready(function() {
+//     jQuery.extend(jQuery.validator.messages, {
+//         required: lang_required,
+//         email: lang_invalid_email,
+// 		equalTo: lang_equal_to,
+// 		minlength: jQuery.validator.format(lang_required_min),
+//     });
+// });
+
+function setCookie(name,value,days) {
+	var expires;
+	if (days) {
+		var date = new Date();
+		date.setTime(date.getTime()+(days*24*60*60*1000));
+		expires = "; expires="+date.toGMTString();
+	} else {
+		expires = "";
+	}
+	document.cookie = name+"="+value+expires+"; path=/";
+}
+
+function getCookie(name) {
+  var value = "; " + document.cookie;
+  var parts = value.split("; " + name + "=");
+  if (parts.length == 2) return parts.pop().split(";").shift();
+}
+
+function restore_form(idform,idmessage,idbutton){
+	if(idform == null) 		idform = '#form1';
+	if(idmessage == null) 	idmessage = '#message';
+	if(idbutton == null) 	idbutton = '#save';
+	clear_form_elements(idform);
+	$(idmessage).removeClass('error');
+	$(idmessage).html('');
+	$(idbutton).val('Save');
+	$(idbutton).html('<i class="icon-save"></i> Save');
+	$(idform+'_new').hide();
+}
+function clear_form_elements(ele) {
+	var kelas;
+    $(ele).find(':input').each(function() {
+		kelas = $(this).attr('class');
+			if(!$(this).hasClass('no_clear')){ //class no_clear di skip. note : class no clear harus disebutkan pertama
+				switch(this.type) {
+					case 'password':
+					case 'select-multiple':
+					case 'select-one':
+					case 'text':
+					case 'email':
+					case 'file':
+					case 'hidden':
+					case 'textarea':
+						$(this).val('');
+						break;
+					case 'checkbox':
+					case 'radio':
+						this.checked = false;
+				}
+			}
+    });
+}
+
+$('.top_menu_hover').mouseover(function(){
+	$("img.lazy-menu").lazyload();
+});
+
+// $(document).ready(function(){
+// 	$("img.lazy-slide").lazyload();
+
+// 	$('#carousel-example-generic').on('slid.bs.carousel', function () { 
+// 		$("img.lazy-slide").lazyload();
+// 	})
+
+// 	$('#carousel-example-generic-personal-test').on('slid.bs.carousel', function () { 
+// 		$("img.lazy-slide").lazyload();
+// 	})
+
+// 	$('#carousel-example-generic-quiz').on('slid.bs.carousel', function () { 
+// 		$("img.lazy-slide").lazyload();
+// 	})
+	
+// })
+
+
+// $(function() {
+//     $("img.lazy").lazyload({
+//         event : "sporty"
+//     });
+// });
+
+$(window).bind("load", function() {
+    var timeout = setTimeout(function() { $("img.lazy").trigger("sporty"); }, 1000);
+});      
+
+
+(function(){
+    // window.switchTo5x=false; // (optional)
+    var e=document.createElement("script");
+    e.type="text/javascript";
+    e.async=true;
+    e.onload=function(){
+        try{
+            stLight.options({publisher: "b87318fa-e73c-4ad7-9483-7369d5897323", doNotHash: true, doNotCopy: true, hashAddressBar: false});
+        }catch(e){ /* optionally do something to handle errors here */ }
+    }
+    // e.src=('https:' == document.location.protocol ? 'https://ws' : 'http://w') + '.sharethis.com/button/buttons.js';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(e, s);
+})();
+
+
+function show_lazy_load_img(){
+	$("img.lazy").lazyload({
+        event : "sporty"
+    });
+    
+	$("img.lazy").trigger("sporty");
+}
+
+$(document).on('click','.load-more-terkini-news',function(){
+    var btn 		= $(this);
+    var datas 		= btn.attr('data-id-news');
+    var text 		= btn.html();
+    var page 		= btn.attr('data-page');
+    var ebook 		= 1;
+    var load_name 	= btn.attr('data-loading-more');
+    var url 		= base_url+'news/load_more_terkini_news/'+page+'/'+ebook;
+    btn.html(load_name);
+    if(text != load_name){
+      $.ajax({
+      	url 	: url,
+      	data 	: {data: datas},
+      	type 	: 'POST',
+        dataType: 'json',
+        success : function(ret){
+        							btn.attr('data-id-news',ret.id_ebooks);
+        							btn.addClass(ret.hide_load_more);
+	                    btn.html(text);
+	                    // $("#list-terkini-news").append(ret.ebooksMore);
+	                    $("#list-terkini-news").append(ret.ebooksMore);
+	                    btn.attr('data-page',ret.page);
+	                    btn.attr('data-id-ebook',ret.id_ebooks);
+	                    if(ret.page == '0'){
+	                      btn.remove();
+	                    }
+                  	},
+        error     : function(a,b,c){
+                    	btn.remove();
+        			}
+      });
+    }
+});

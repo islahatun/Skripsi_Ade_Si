@@ -1,0 +1,139 @@
+$(document).ready(function(){
+
+	$('#send-contact-us').click(function(){
+		if ($('#formContactUs').parsley().validate()) {
+			
+			var response = grecaptcha.getResponse();
+			if (response.length === 0) {
+				// alert('batal');
+			} else {
+				// window.location.href=this_controller;
+			}
+		} else {
+			// alert('kosong');
+		}
+		
+	});
+
+    var highestBox = 0;
+        $('.heightsame').each(function(){  
+                if($(this).height() > highestBox){  
+                highestBox = $(this).height();  
+        }
+    });    
+
+
+    $('.owl-carousels').owlCarousel({
+	    // center: true,
+	    autoplay:true,
+	    items:3,
+	    loop:true,
+	    margin:15,
+	    autoplayTimeout: 5000,
+	    // responsive:{
+	    //     600:{
+	    //         items:4
+	    //     }
+	    // }
+	});
+
+	$('.heightsame').height(highestBox);
+
+    var id = $('#count_artikel_terkait').text();
+    if ( id <= 3 ){
+    	var looping = false;
+    } else {
+    	var looping = true;
+    }
+
+    $('#owl-carousel-dtl').owlCarousel({
+	    // center: true,
+	    autoplay:true,
+	    items:3,
+	    loop:looping,
+	    margin:15,
+	    autoplayTimeout: 5000,
+	    dots: false,
+	    responsiveClass:true,
+	      responsive:{
+	          0:{
+	              items:1,
+	          },
+	          600:{
+	              items:3,
+	          },
+	          1000:{
+	              items:3,
+	          }
+	      }
+	});
+
+	$('#owl-carousel-dtl-home').owlCarousel({
+	    // center: true,
+	    autoplay:true,
+	    items:3,
+	    loop:true,
+	    margin:15,
+	    autoplayTimeout: 5000,
+	    dots: false,
+	    // responsive:{
+	    //     600:{
+	    //         items:4
+	    //     }
+	    // }
+	});
+
+	// $('a[data-toggle="collapse"]').on('click',function(){
+	//   var id=$(this).attr('href');
+	//   if($(id).hasClass('in'))
+	//   {
+	//     $(id).collapse('hide');
+	//   }
+	  
+	//   else{
+	//     $(id).collapse('show');
+	//   }
+	// });
+
+ 
+});
+
+
+$(document).on("click", "#list_province li", function() {
+	$("#list_province").addClass("hidden");
+	$("#list_city").removeClass("hidden");
+
+	$('.clear-search').css('background','url('+base_url+'asset/images/close-search.png) ');
+ //    $('.clear-search').attr('id', 'removeSearch');
+ //    $('.clear-search').removeClass("hidden");
+
+	return false;
+});
+
+$(document).on("click", "#dLabel", function() {
+	$("#list_city").addClass("hidden");
+	$("#list_province").removeClass("hidden");
+    $('#autocomplete').focus();
+     var no          = 0;
+    
+	$.getJSON(base_url+"generate/file-JSON/all-province.json", function(data) {
+    province = "";
+    $.each(data, function(index, element) {
+    if(no++ % 9 == 0) {
+      province = province + "</ul><ul class='column-region col25'>";
+    } else {
+      province = province + '';
+    } 
+      province = province + "<li class='"+ no++ +"'><a class='link regionlink region_links' data-id='"+ element.kd_prov +"' data-name='"+ element.provinsi +"' data-uri='"+ element.uri_path_provinsi +"'><span>" + element.provinsi + "</span></a></li>";
+    });
+
+    province = province +"</ul>";
+    $('#list_provinsi').html(province);
+    });
+});
+
+$(document).on("click", "#list_city #back_to_province", function() {
+	$("#list_city").addClass("hidden");
+	$("#list_province").removeClass("hidden");
+	return false;
+});

@@ -1,0 +1,37 @@
+$(document).ready(function(){
+
+    $('#submit_lapor').click(function(){
+        if ($('#form-lapor').parsley().validate()) {
+            
+            var response = grecaptcha.getResponse();
+            if (response.length === 0) {
+                alert('Captha Belum dicentang');
+            } else {
+               ajx = $.ajax({
+                url         : $('#form-lapor').attr('action'),
+                type        : "POST",
+                // dataType    : 'json',
+                data        : $('#form-lapor').serialize(),
+                success     : function(ret){
+                                if (ret.error==1) {
+                                    $('#modalLapor').modal('hide');
+                                    $('#modal_failed').modal('show');
+                                    clear_form_elements('#form-lapor');
+                                    
+                                }
+                                else{
+                                    clear_form_elements('#form-lapor');
+                                    $('#modal_success').modal('show');
+                                    setTimeout(function(){ 
+                                        location.reload();
+                                    }, 2000);
+                                }                
+                }
+                });
+            }
+        } 
+        return false;
+        
+    });
+});
+

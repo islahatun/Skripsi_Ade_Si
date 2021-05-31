@@ -1,0 +1,135 @@
+// ---------------- Onload event
+	$(document).ready(function(){
+		$('.next-step').attr('disabled', true);
+		$('.next-step:first').attr('disabled', false);
+
+		total_step = $('.multi-step').length;
+		$('.multi-step:last').removeClass('step-end').addClass('step-'+total_step);
+	});
+// -----------------------------
+
+// ----------------- Multi-step Form -----------------
+	$('.next-step').click(function(e) {
+		var page     = $(this).attr('page');
+		var thisStep = $('.step-'+page);
+		var nextPage = parseInt(page) + 1;
+		var maxPage  = $('.multi-step').length - 1;
+		var endPage  = $('.multi-step').length;
+
+		if (page == 1) {
+        	$('.no-item').remove();
+		}
+
+		if (page == maxPage) {
+			// Submit
+			loading()
+			var form = $('#form-srb');
+			$.ajax({
+				url         : $(form).attr('action'),
+				type        : "POST",
+				dataType	: 'json',
+				data        : $(form).serialize(),
+				error		: function () {
+								loadingcomplete();
+							},
+				success     : function(ret){
+								if (ret.error == 1) {
+									loadingcomplete();
+									alert(ret.message);
+									window.location.href=base_url;
+
+									// $.gritter.add({title:page_name,text:ret.message,class_name:'error-update'});
+								} else {
+									loadingcomplete();
+									$('.header-step-'+endPage).addClass('active');
+									$('.step-'+page).fadeOut();
+									$('.step-'+page).addClass('hidden');
+									$('.step-'+endPage).fadeIn();
+									$('.step-'+endPage).removeClass('hidden');
+								}
+				}
+			});
+		} else {
+			if (nextPage == maxPage) {
+				$('.next-step[page="'+maxPage+'"]').attr('id', 'submit-survey');
+				$('#submit-survey').find('.next-button-label').html('Selesai');
+			}
+
+			$('.header-step-'+nextPage).addClass('active');
+			$('.step-'+page).fadeOut();
+			$('.step-'+page).addClass('hidden');
+			$('.step-'+nextPage).fadeIn();
+			$('.step-'+nextPage).removeClass('hidden');
+		}
+
+	});
+
+	$('.previous-step').click(function(e) {
+		var page     = $(this).attr('page');
+		var thisStep = $('.step-'+page);
+		var prevPage = parseInt(page) - 1;
+		if (prevPage < 1) { return false; }
+
+		$('.header-step-'+prevPage).addClass('active');
+		$('.step-'+page).fadeOut();
+		$('.step-'+page).addClass('hidden');
+		$('.step-'+prevPage).fadeIn();
+		$('.step-'+prevPage).removeClass('hidden');
+
+	});
+// ---------------- End Multi-step -------------------
+
+// ---------------- Click Event ----------------------
+	$(document).on('click', 'input[type="radio"]', function(){
+		$(this).closest('.row').find('input[type="radio"]').prop('checked', false);
+		$(this).prop('checked', true);
+	});
+	
+	$(document).on('click', 'input[type="checkbox"], input[type="radio"]', function(){
+
+		if ($(this).is(':checked') === true) {
+			$(this).closest('.multi-step').find('.next-step').removeAttr('disabled');
+		} else {
+			$(this).closest('.multi-step').find('.next-step').attr('disabled', 'disabled');
+		}
+	});
+
+	$(document).on('keyup', 'textarea', function(){
+
+		if ($(this).val().length > 0) {
+			$(this).closest('.multi-step').find('.next-step').removeAttr('disabled');
+		} else {
+			$(this).closest('.multi-step').find('.next-step').attr('disabled', 'disabled');
+		}
+	});
+
+	$(document).on('click', '.data-confirmation', function(){
+		$(this).closest('.row').find('.data-confirmation').prop('checked', false);
+		$(this).prop('checked', true);
+
+		if ($(this).val() == 0) {
+			$(this).closest('.row').find('input[type="text"]').removeAttr('disabled');
+			$(this).closest('.row').find('input[type="email"]').removeAttr('disabled');
+
+			var kode_token = $('form').attr('token');
+
+			$.ajax({
+				url         : this_controller + 'get_data_pengguna/'+kode_token,
+                type        : 'post',
+                dataType    : 'json',
+                success     : function(ret){
+                				$('input[name="nama"]').val(ret.nama);
+                				$('input[name="no_hp"]').val(ret.no_hp);
+                				$('input[name="email"]').val(ret.email);
+                },
+                error       : function(ret){},
+			})
+		} else {
+			$(this).closest('.row').find('input[type="text"]').attr('disabled', 'disabled');
+			$(this).closest('.row').find('input[type="email"]').attr('disabled', 'disabled');
+
+			$('input[name="nama"]').val('');
+			$('input[name="no_hp"]').val('');
+			$('input[name="email"]').val('');
+		}
+	});

@@ -1,0 +1,130 @@
+Mulai
+Menampilkan halaman login
+melakukan login sistem{
+    Masukkan username dan password{
+        if((username && password)== true){
+            is("Masyarakat"){
+                menampilkan halaman utama masyarakat
+            }else if ("RT"){
+                Menampilkan halaman utama rt
+            } else if("RW"){
+                menmapilkan halaman utama rw              
+            } else {
+                menampilkan halaman utama kelurahan
+            }
+        }if else ((usernanme || password)== false){
+            menampilkan pesan data yang dimasukkan salah
+        }
+        else{
+            melakukan registrasi akun
+            klik tombol buat akun{
+                menampilkan halaman registrasi
+                input data, simpan
+                if (data kosong){
+                    data tidak boleh kosong
+                } else{
+                    data disimpan menampilkan pesan sukses
+                }
+            }
+        }
+    }
+    Melakukan sebagai masyarakat{
+        melakukan pengajuan surat permohonan ktp{
+            melakukan input data{
+                tampil form data surat 
+                input data, kirim 
+                if (data kosong){
+                    data tidak boleh kosong
+                } else{
+                    data tersimpan dan menampilkan pesan sukses
+                }
+            }
+        }
+        melakukan pengajuan surat permohonan kk{
+            melakukan input data {
+                tampil form data surat
+                input data, kirim
+                    if(data kosong){
+                        data tidak boleh kosong
+                    } else {
+                        data tersimpan dan menampilkan pesan
+                    }
+            }
+        }
+        mengajukan surat domisili{
+            melakukan input data{
+                tampil form data surat
+                input data surat
+                if(data kosong){
+                    data tidak boleh kosong
+                } else{
+                    data tersimpan dan menampilkan pesan
+                }
+            }
+        }
+    }
+    melakukan sebagai rt{
+        aktivasi akun masyarakat{
+            melakukan input aktivasi {
+                tampil tabel data masyarakat
+                acc, simpan
+            }
+        }
+         melakukan edit data masyarakat{
+            melkaukan edit data {
+                tambil tabel masyarakat
+                klik tombol edit{
+                    tampil form edit
+                    edit,
+                }
+            }
+        }
+        acc surat pengajuan{
+            melakukan input acc{
+                tampil tabel pengajuan surat{
+                    acc, simpan
+                }
+            }
+        }
+    }
+    melakukan sebagai rw{
+        acc surat pengajuan dari rt{
+            melakukan input acc{
+                tampil tabel pengajuan surat{
+                    acc, simpan
+                }
+            }
+        }
+    }
+    melakukan sebagai kelurahan{
+        Memasukkan data rt{
+            melakukan input data{
+                tampil form data
+                input data, simpan
+                if(data kosong){
+                    data tidak boleh kosong
+                }else{
+                    data tersimpan dan menampilkan pesan sukses
+                }
+            }
+        }
+        memasukkan data rw{
+            melakukan input data{
+                tampil form data
+                input data, simpan
+                if(data kososng){
+                    
+                }
+            }
+        }
+        acc surat pengajuan{
+            melakukan input acc{
+                tampil tabel surat pengajuan{
+                    acc, simpan, print
+                }
+            }
+        }
+    }
+}
+logout sistem
+selesai

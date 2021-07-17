@@ -12,21 +12,10 @@ melakukan login sistem{
             } else {
                 menampilkan halaman utama kelurahan
             }
-        }if else ((usernanme || password)== false){
+        } else{
             menampilkan pesan data yang dimasukkan salah
         }
-        else{
-            melakukan registrasi akun
-            klik tombol buat akun{
-                menampilkan halaman registrasi
-                input data, simpan
-                if (data kosong){
-                    data tidak boleh kosong
-                } else{
-                    data disimpan menampilkan pesan sukses
-                }
-            }
-        }
+       
     }
     Melakukan sebagai masyarakat{
         melakukan pengajuan surat permohonan ktp{
@@ -70,12 +59,36 @@ melakukan login sistem{
                 acc, simpan
             }
         }
-         melakukan edit data masyarakat{
-            melkaukan edit data {
+        
+         melakukan Kelola pengguna{
+             melakukan tambah data {
+                klik tombol tambah data{
+                    tampil form tambah data
+                   klik creat
+                   if(data kosong){
+                    data tidak boleh kosong
+                } else{
+                    data tersimpan dan menampilkan pesan
+                }
+            }
+             }
+            melakukan edit data {
                 tambil tabel masyarakat
                 klik tombol edit{
-                    tampil form edit
-                    edit,
+                    tampil form update
+                   update
+                }
+            }
+            melakukan lihat detail data {
+                tambil tabel masyarakat
+                klik tombol detail{
+                    tampil data masyarakat
+                }
+            }
+            melakukan hapus data {
+                tambil tabel masyarakat
+                klik tombol Hapus{
+                   Data Terhapus
                 }
             }
         }
@@ -128,3 +141,88 @@ melakukan login sistem{
 }
 logout sistem
 selesai
+
+Melakukan Kelola Pengajuan{
+    Melakukan tambah data{
+        klik tombol tambah {
+            tampil form tambah data
+            input data
+            creat
+            if(data kosong){
+                    data tidak boleh kosong
+                }else{
+                    data tersimpan dan menampilkan pesan sukses
+                }
+        }
+    }
+    Melakukan update data{
+        tampil tabel pengajuan{
+            klik tombol update{
+                tampil form pengajuan
+                klik update
+            }
+        }
+    }
+    Melakukan lihat detail data{
+        tampil tabel pengajuan{
+            klik tombol update{
+                tampil form pengajuan
+            }
+        }
+    }
+    Melakukan hapus data{
+        tampil tabel pengajuan{
+            klik tombol Hapus{
+               Data terhapus
+            }
+        }
+    }
+    melakukan download laporan{
+        klik tombol export ms.word{
+            data terunduh
+        }
+    }
+}
+
+Melakukan data KTP{
+    Melakukan acc data {
+        tampil tabel pengajuan{
+            pilih data
+        klik tombol acc{
+            data di setujui
+        }
+        }
+    }
+    Melakukan tolak data {
+        tampil tabel pengajuan{
+            pilih data
+        klik tombol tolak{
+           tampil form tolak
+           input data
+           klik creat
+           if(data kosong){
+                data tidak boleh kosong
+                }else{
+                    data tersimpan dan menampilkan pesan sukses
+                }
+        }
+        }
+    }
+    Melakukan lihat detail data{
+        tampil tabel pengajuan{
+            pilih data
+        klik tombol detail{
+            tampil form data
+        }
+        }
+    }
+}
+    Melakukan download surat{
+        menampilkan tabel pengajuan{
+            pilih data
+        klik tombol download{
+            tampil surat
+        }
+        }
+    }
+}
